@@ -8,8 +8,10 @@ const CharactersList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/characters");
-        console.log(response.data);
+        const response = await axios.get(
+          "https://site--marvel--zsy52dpjc444.code.run/"
+        );
+        // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
