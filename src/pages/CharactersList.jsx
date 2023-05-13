@@ -3,38 +3,36 @@ import axios from "axios";
 
 const CharactersList = () => {
   const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isloading, setIsloading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://site--marvel--zsy52dpjc444.code.run/"
-        );
+        const response = await axios.get("http://localhost:3000/personnages");
         // console.log(response.data);
         setData(response.data);
-        setIsLoading(false);
+        setIsloading(false);
       } catch (error) {
-        console.log(error.message);
+        console.log("inthecatch");
       }
     };
     fetchData();
   }, []);
-
-  return isLoading ? (
-    <p>Loading ..</p>
+  return isloading ? (
+    <p>😩 Loading 😩</p>
   ) : (
     <div>
-      {data.results.map((character) => {
+      {data.results.map((personnage) => {
         return (
-          <article key={character.id}>
-            <h2>{character.name}</h2>
+          <article key={personnage._id}>
+            <h2>{personnage.name}</h2>
             <img
               src={
-                character.thumbnail.path + "." + character.thumbnail.extension
+                personnage.thumbnail.path + "." + personnage.thumbnail.extension
               }
-              alt={character.name}
+              alt={personnage.name}
             />
+            <p>{personnage.description}</p>
           </article>
         );
       })}

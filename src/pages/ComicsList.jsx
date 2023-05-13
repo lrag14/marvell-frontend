@@ -1,45 +1,40 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const ComicsList = () => {
-  const [comics, setComics] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState();
+  const [isloading, setIsloading] = useState(true);
 
   useEffect(() => {
-    const fetchComics = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://site--marvel--zsy52dpjc444.code.run/comics"
-        );
-        setComics(response.data.results);
+        const response = await axios.get("http://localhost:3000/comics");
+        // console.log(response.data);
+        setData(response.data);
+        setIsloading(false);
       } catch (error) {
-        console.log(error.message);
+        console.log("inthecatch");
       }
-
-      setIsLoading(false);
     };
-
-    fetchComics();
+    fetchData();
   }, []);
-
-  return isLoading ? (
-    <p>Loading ..</p>
+  return isloading ? (
+    <p>😩 Loading 😩</p>
   ) : (
-    <article>
-      <h1>Comics</h1>
-      <div className="comics-list">
-        {comics.map((comic) => (
-          <div className="comic" key={comic.id}>
+    <div>
+      {data.results.map((comicbd) => {
+        return (
+          <article key={comicbd._id}>
+            <h2>{comicbd.title}</h2>
             <img
-              src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-              alt={comic.title}
+              src={comicbd.thumbnail.path + "." + comicbd.thumbnail.extension}
+              alt={comicbd.title}
             />
-            <h2>{comic.title}</h2>
-            <p>{comic.description}</p>
-          </div>
-        ))}
-      </div>
-    </article>
+            <p>{comicbd.description}</p>
+          </article>
+        );
+      })}
+    </div>
   );
 };
 
