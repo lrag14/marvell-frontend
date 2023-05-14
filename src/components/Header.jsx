@@ -22,7 +22,7 @@ const Header = () => {
       <img src={logo} alt="Marvel Logo" />
       <div>
         <h1>
-          <input type="text" name="" id="" />
+          <input type="text" placeholder="😫search in progress😫" />
         </h1>
       </div>
     </header>
