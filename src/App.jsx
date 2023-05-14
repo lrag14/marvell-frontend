@@ -4,6 +4,8 @@ import "./App.css";
 //PAGES************
 import CharactersList from "./pages/CharactersList.jsx";
 import ComicsList from "./pages/ComicsList.jsx";
+import Favorits from "./pages/Favorits.jsx";
+import CharacterComicsList from "./pages/CharacterComicsList.jsx";
 
 // COMPONENTS**********************
 import Header from "./components/Header.jsx";
@@ -15,6 +17,8 @@ function App() {
       <Routes>
         <Route path="/" element={<CharactersList />} />
         <Route path="/comics" element={<ComicsList />} />
+        <Route path="/favoris" element={<Favorits />} />
+        <Route path="/character/:_id" element={<CharacterComicsList />} />
       </Routes>
     </Router>
   );

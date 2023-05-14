@@ -8,8 +8,11 @@ const ComicsList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/comics");
-        // console.log(response.data);
+        const response = await axios.get(
+          `https://site--marvel--zsy52dpjc444.code.run/characters`
+        );
+
+        console.log(response.data);
         setData(response.data);
         setIsloading(false);
       } catch (error) {
@@ -22,9 +25,9 @@ const ComicsList = () => {
     <p>😩 Loading 😩</p>
   ) : (
     <div>
-      {data.results.map((comicbd) => {
+      {data.results.map((comicbd, index) => {
         return (
-          <article key={comicbd._id}>
+          <article key={index}>
             <h2>{comicbd.title}</h2>
             <img
               src={comicbd.thumbnail.path + "." + comicbd.thumbnail.extension}

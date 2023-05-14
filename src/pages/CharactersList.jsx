@@ -1,39 +1,44 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const CharactersList = () => {
-  const [data, setData] = useState();
-  const [isloading, setIsloading] = useState(true);
+  const [characters, setCharacters] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCharacters = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/personnages");
+        const response = await axios.get(
+          "https://site--marvel--zsy52dpjc444.code.run/characters"
+        );
         // console.log(response.data);
-        setData(response.data);
-        setIsloading(false);
+        setCharacters(response.data.results);
+        setIsLoading(false);
       } catch (error) {
-        console.log("inthecatch");
+        console.log(error);
       }
     };
-    fetchData();
+    fetchCharacters();
   }, []);
-  return isloading ? (
+
+  return isLoading ? (
     <p>😩 Loading 😩</p>
   ) : (
     <div>
-      {data.results.map((personnage) => {
+      {characters.map((character) => {
         return (
-          <article key={personnage._id}>
-            <h2>{personnage.name}</h2>
+          <Link
+            key={character.comics}
+            to={`https://site--marvel--zsy52dpjc444.code.run/${character._id}`}
+          >
+            <h2>{character.name}</h2>
             <img
-              src={
-                personnage.thumbnail.path + "." + personnage.thumbnail.extension
-              }
-              alt={personnage.name}
+              src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+              alt={character.name}
             />
-            <p>{personnage.description}</p>
-          </article>
+            <p>{character.description}</p>
+          </Link>
         );
       })}
     </div>
