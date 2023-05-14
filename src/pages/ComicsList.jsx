@@ -9,7 +9,7 @@ const ComicsList = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://site--marvel--zsy52dpjc444.code.run/characters`
+          `https://site--marvel--zsy52dpjc444.code.run/comics`
         );
 
         console.log(response.data);
@@ -24,19 +24,28 @@ const ComicsList = () => {
   return isloading ? (
     <p>😩 Loading 😩</p>
   ) : (
-    <div>
-      {data.results.map((comicbd, index) => {
-        return (
-          <article key={index}>
-            <h2>{comicbd.title}</h2>
-            <img
-              src={comicbd.thumbnail.path + "." + comicbd.thumbnail.extension}
-              alt={comicbd.title}
-            />
-            <p>{comicbd.description}</p>
-          </article>
-        );
-      })}
+    <div className="main">
+      <div className="characters-container">
+        {data.results.map((comic) => {
+          return (
+            <div key={comic._id} className="character-card">
+              <h1>{comic.title}</h1>
+
+              <div className="character-info">
+                <div className="character-image">
+                  <img
+                    src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                    alt={comic.title}
+                  />
+                </div>
+                <div className="character-description">
+                  <p>{comic.description}</p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

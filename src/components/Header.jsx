@@ -20,6 +20,11 @@ const Header = () => {
         </ul>
       </nav>
       <img src={logo} alt="Marvel Logo" />
+      <div>
+        <h1>
+          <input type="text" name="" id="" />
+        </h1>
+      </div>
     </header>
   );
 };

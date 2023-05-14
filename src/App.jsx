@@ -5,10 +5,11 @@ import "./App.css";
 import CharactersList from "./pages/CharactersList.jsx";
 import ComicsList from "./pages/ComicsList.jsx";
 import Favorits from "./pages/Favorits.jsx";
-import CharacterComicsList from "./pages/CharacterComicsList.jsx";
+// import CharacterComicsList from "./pages/CharacterComicsList.jsx";
 
 // COMPONENTS**********************
 import Header from "./components/Header.jsx";
+import Search from "./components/Search.jsx";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path="/" element={<CharactersList />} />
         <Route path="/comics" element={<ComicsList />} />
         <Route path="/favoris" element={<Favorits />} />
-        <Route path="/character/:_id" element={<CharacterComicsList />} />
+        {/* <Route path="/comic/:comicId" element={<CharacterComicsList />} /> */}
       </Routes>
     </Router>
   );
